@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'dashboard::index');
 
+$routes->delete('/kriteria/delete/(:any)', 'Kriteria::delete/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

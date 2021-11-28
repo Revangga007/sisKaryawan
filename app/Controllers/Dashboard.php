@@ -9,6 +9,7 @@ class Dashboard extends BaseController
     public function index()
     {
         $data['title'] = 'Dashboard';
+        $data['pegawai'] = 50;
         return view('dashboard', $data);
     }
 }

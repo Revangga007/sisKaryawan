@@ -40,4 +40,22 @@ class Validation
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+    public $kriteria = [
+        'nama'  => 'required|is_unique[kriteria.nama]',
+        'bobot' => 'required',
+        'status'=> 'required'
+    ];
+
+    public $kriteria_errors = [
+        'nama'  =>[
+            'required'   => 'Nama kriteria harus diisi',
+            'is_unique' => 'Nama kriteria sudah terdaftar'
+        ],
+        'bobot'  =>[
+            'required'   => 'Bobot kriteria harus diisi'
+        ],
+        'status'  =>[
+            'required'   => 'Status kriteria harus diisi',
+        ],
+    ];
 }
