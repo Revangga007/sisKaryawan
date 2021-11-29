@@ -25,9 +25,9 @@ class Kriteria extends BaseController
         session();
         $jumlahKode = $this->model->countAll();
         if($jumlahKode > 0) {
-            $data['generateKode'] = sprintf("A%s", $jumlahKode + 1);
+            $data['generateKode'] = sprintf("C%s", $jumlahKode + 1);
         } else if($jumlahKode == 0) {
-            $data['generateKode'] = "A1";
+            $data['generateKode'] = "C1";
         }
         $data['title'] = $this->title;
         $data['validation'] = \Config\Services::validation();

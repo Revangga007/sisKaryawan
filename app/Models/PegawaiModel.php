@@ -6,37 +6,34 @@ use CodeIgniter\Model;
 
 class PegawaiModel extends Model
 {
-    protected $DBGroup          = 'default';
     protected $table            = 'pegawai';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $insertID         = 0;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
+    protected $primaryKey       = 'kode';
+    protected $useAutoIncrement = false;
+    protected $useTimestamps    = true;
     protected $allowedFields    = [];
 
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    
+    public function getData($kode = false)
+    {
+        if ($kode == false) {
+            return $this->findAll();
+        } else {
+            return $this->getWhere(['kode' => $kode]);
+        }
+    }
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
+    public function storeData($pegawai)
+    {
+        return $this->db->table($this->table)->insert($pegawai);
+    }
 
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    public function updateData($pegawai, $kode)
+    {
+        return $this->db->table($this->table)->update($pegawai,['kode' => $kode]);
+    }
+
+    public function deleteData($kode)
+    {
+        return $this->delete($kode);
+    }
+
 }
