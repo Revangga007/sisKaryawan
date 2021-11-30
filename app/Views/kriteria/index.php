@@ -29,12 +29,35 @@
                             <td><?= $kriteria['status']; ?></td>
                             <td>
                                 <a href="<?= base_url('kriteria/edit/'.$kriteria['kode']); ?>" class="btn btn-sm btn-warning"><li class="fa fa-edit"></li>&nbsp;Edit</a>
-                                <form action="<?= base_url('kriteria/delete/'.$kriteria['kode']); ?>" method="post" class="d-inline">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <?= csrf_field(); ?>
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin');"><li class="fa fa-trash"></li>&nbsp;Hapus</button>
-                                </form>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapus_<?= $kriteria['kode']; ?>">
+                                    <li class="fa fa-trash"></li>
+                                    &nbsp;Hapus
+                                </button>
+                                <!-- Modal Hapus -->
+                                <div class="modal fade" id="modalHapus_<?= $kriteria['kode']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="ModalLabel">Konfirmasi Hapus Data</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Apakah anda yakin akan menghapus data <?= $kriteria['nama']; ?>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="<?= base_url('kriteria/delete/'.$kriteria['kode'])?>" method="post">
+                                                <?= csrf_field(); ?>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-danger btn-danger">Konfirmasi</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
+
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -42,4 +65,7 @@
             </div>
         </div>
     </div>
+    <script>
+
+    </script>
 <?= $this->endSection(); ?>
