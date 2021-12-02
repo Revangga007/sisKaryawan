@@ -10,7 +10,7 @@ class PegawaiModel extends Model
     protected $primaryKey       = 'kode';
     protected $useAutoIncrement = false;
     protected $useTimestamps    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['kode', 'nama', 'jekel', 'no_hp', 'alamat', 'jabatan'];
 
     public function getData($kode = false)
     {

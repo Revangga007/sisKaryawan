@@ -10,7 +10,7 @@ class Pegawai extends Migration
     {
         $this->forge->addField([
             'kode' => [
-                'type'          => 'CHAR',
+                'type'          => 'VARCHAR',
                 'constraint'    => 4,
             ],
             'nama' => [

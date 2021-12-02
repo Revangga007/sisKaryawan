@@ -8,7 +8,7 @@ class AlternatifModel extends Model
 {
     protected $table            = 'alternatif';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id', 'kode_pegawai', 'kode_kriteria', 'nilai_kriteria'];
     protected $useTimestamps    = true;
 
     public function getData($id = false)

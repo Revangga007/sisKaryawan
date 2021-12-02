@@ -46,6 +46,14 @@ class Validation
         'status'=> 'required'
     ];
 
+    public $pegawai = [
+        'nama'  => 'required',
+        'jekel' => 'required',
+        'no_hp' => 'required',
+        'alamat'=> 'required',
+        'jabatan'=> 'required'
+    ];
+
     public $kriteria_errors = [
         'nama'  =>[
             'required'   => 'Nama kriteria harus diisi',
@@ -56,6 +64,24 @@ class Validation
         ],
         'status'  =>[
             'required'   => 'Status kriteria harus diisi',
+        ],
+    ];
+
+    public $pegawai_errors = [
+        'nama'  =>[
+            'required'   => 'Nama pegawai harus diisi',
+        ],
+        'jekel'  =>[
+            'required'   => 'Jenis kelamin pegawai harus diisi',
+        ],
+        'no_hp'  =>[
+            'required'   => 'No.handphone pegawai harus diisi',
+        ],
+        'alamat'  =>[
+            'required'   => 'Alamat pegawai harus diisi',
+        ],
+        'jabatan'  =>[
+            'required'   => 'Jabatan pegawai harus diisi',
         ],
     ];
 }
