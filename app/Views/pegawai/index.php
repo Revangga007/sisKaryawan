@@ -17,7 +17,6 @@
                             <th>Jekel</th>
                             <th>No.HP</th>
                             <th>Alamat</th>
-                            <th>Jabatan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -30,7 +29,6 @@
                             <td><?= $pegawai['jekel']; ?></td>
                             <td><?= $pegawai['no_hp']; ?></td>
                             <td><?= $pegawai['alamat']; ?></td>
-                            <td><?= $pegawai['jabatan']; ?></td>
                             <td>
                                 <a href="<?= base_url('pegawai/edit/'.$pegawai['kode']); ?>" class="btn btn-sm btn-warning"><li class="fa fa-edit"></li>&nbsp;Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapus_<?= $pegawai['kode']; ?>">
@@ -53,6 +51,7 @@
                                             <div class="modal-footer">
                                                 <form action="<?= base_url('pegawai/delete/'.$pegawai['kode'])?>" method="post">
                                                 <?= csrf_field(); ?>
+                                                <input type="hidden" name="_method" value="DELETE">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                                 <button type="submit" class="btn btn-danger btn-danger">Konfirmasi</button>
                                                 </form>

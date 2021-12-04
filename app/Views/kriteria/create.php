@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="bobot">Bobot Kriteria</label>
-                        <input type="number" step="0.01" min="0.00" max="1.00" name="bobot" id="bobot" class="form-control <?= $validation->hasError('bobot') ? 'is-invalid': null; ?>" placeholder="Masukkan Bobot Kriteria" value="<?= old('bobot'); ?>">
+                        <input type="number" step="0.01" min="0.00" max="1.00" name="bobot" id="bobot" class="form-control <?= $validation->hasError('bobot') ? 'is-invalid': null; ?>" placeholder="Masukkan Bobot Kriteria" value="<?= old('bobot') ?? '0.00'; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('bobot'); ?>
                         </div>

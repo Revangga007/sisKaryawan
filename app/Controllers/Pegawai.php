@@ -15,7 +15,7 @@ class Pegawai extends BaseController
     public function index()
     {
         $data['title'] = $this->title;
-        $data['pegawais'] = $this->model->getData();
+        $data['pegawais'] = $this->model->findAll();
         return view('pegawai/index', $data);
     }
 
@@ -42,10 +42,9 @@ class Pegawai extends BaseController
            'jekel'  => $this->request->getPost('jekel'),
            'no_hp'  => $this->request->getPost('no_hp'),
            'alamat' => $this->request->getPost('alamat'),
-           'jabatan'=> $this->request->getPost('jabatan')
        ];
        if($validation->run($pegawai, 'pegawai')){
-           $this->model->storeData($pegawai);
+           $this->model->save($pegawai);
            session()->setFlashdata('success', 'Data pegawai berhasil disimpan');
            return redirect()->to(base_url('pegawai'));
        } else {
@@ -57,7 +56,7 @@ class Pegawai extends BaseController
     {
         session();
         $data['title'] = $this->title;
-        $data['pegawai'] = $this->model->getData($kode)->getRowArray();
+        $data['pegawai'] = $this->model->where(['kode' => $kode])->first();
         $data['validation'] = \Config\Services::validation();
         return view('pegawai/edit', $data);
     }
@@ -71,10 +70,9 @@ class Pegawai extends BaseController
            'jekel'  => $this->request->getPost('jekel'),
            'no_hp'  => $this->request->getPost('no_hp'),
            'alamat' => $this->request->getPost('alamat'),
-           'jabatan'=> $this->request->getPost('jabatan')
         ];
         if($validation->run($pegawai, 'pegawai')){
-           $this->model->updateData($pegawai,$kode);
+           $this->model->save($pegawai,['kode' => $kode]);
            session()->setFlashdata('success', 'Data pegawai berhasil diupdate');
            return redirect()->to(base_url('pegawai'));
         } else {
@@ -84,7 +82,7 @@ class Pegawai extends BaseController
 
     public function delete($kode)
     {
-        $this->model->deleteData($kode);
+        $this->model->delete($kode);
         session()->setFlashdata('success', 'Data pegawai berhasil dihapus');
         return redirect()->to(base_url('pegawai'));
     }

@@ -11,13 +11,12 @@ class AlternatifModel extends Model
     protected $allowedFields    = ['id', 'kode_pegawai', 'kode_kriteria', 'nilai_kriteria'];
     protected $useTimestamps    = true;
 
-    public function getData($id = false)
-    {
-        if ($id == false) {
-            return $this->findAll();
-        } else {
-            return $this->getWhere(['id' => $id]);
-        }
+    public function getJoinData($kode){
+        return $this->db->table('alternatif')
+        ->select('')
+        ->join('pegawai', 'pegawai.kode=alternatif.kode_pegawai')
+        ->join('kriteria', 'kriteria.kode=alternatif.kode_kriteria')
+        ->where(['pegawai.kode' => $kode])->get()->getResultArray();
     }
 
 }

@@ -41,7 +41,7 @@ class Validation
     // Rules
     //--------------------------------------------------------------------
     public $kriteria = [
-        'nama'  => 'required|is_unique[kriteria.nama]',
+        'nama'  => 'required',
         'bobot' => 'required',
         'status'=> 'required'
     ];
@@ -51,13 +51,18 @@ class Validation
         'jekel' => 'required',
         'no_hp' => 'required',
         'alamat'=> 'required',
-        'jabatan'=> 'required'
+    ];
+
+    public $user = [
+        'nama'  => 'required',
+        'username' => 'required',
+        'password' => 'required',
+        'role' => 'required',
     ];
 
     public $kriteria_errors = [
         'nama'  =>[
             'required'   => 'Nama kriteria harus diisi',
-            'is_unique' => 'Nama kriteria sudah terdaftar'
         ],
         'bobot'  =>[
             'required'   => 'Bobot kriteria harus diisi'
@@ -80,8 +85,20 @@ class Validation
         'alamat'  =>[
             'required'   => 'Alamat pegawai harus diisi',
         ],
-        'jabatan'  =>[
-            'required'   => 'Jabatan pegawai harus diisi',
+    ];
+
+    public $user_errors = [
+        'nama'  =>[
+            'required'   => 'Nama pegawai harus diisi',
         ],
+        'username'=>[
+            'required'   => 'Nama harus diisi',
+        ],
+        'password'=>[
+            'required'   => 'Password harus diisi',
+        ],
+        'role'=>[
+            'required'   => 'Role harus diisi',
+        ]
     ];
 }

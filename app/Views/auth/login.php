@@ -9,6 +9,7 @@
 
     <title>login - sisKaryawan</title>
 
+    <link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/css/all.min.css') ?>" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
@@ -21,28 +22,33 @@
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
-
-            <div class="col-6">
-
+            <div class="col-5">
+                <h1 class="text-center text-white mt-5"><li class="fas fa-medal"></li>&nbsp;SisKaryawan</h1>
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col">
-                                <i class="fas fa-medal"></i> Siskaryawan
                                <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Halaman Login</h1>
                                     </div>
-                                    <form class="user">
+                                     <?php if (!empty(session()->getFlashdata('danger'))) : ?>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <?= session()->getFlashData('danger') ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
+                                    <form class="user" action="<?= base_url('login'); ?>" method="post" >
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="username" name="username" placeholder="Masukkan Username" value="<?= old('username'); ?>">   
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="password" name="password" placeholder="Masukkan Password" value="<?= old('password'); ?>">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
@@ -60,14 +66,9 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="<?= base_url('assets/vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets/js/sb-admin-2.min.js') ?>"></script>
 
 </body>

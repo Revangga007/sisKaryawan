@@ -4,6 +4,7 @@
     <div class="card shadow mb-4">
         <form action="<?= base_url('pegawai/update/'.$pegawai['kode']); ?>" method="post">
         <?= csrf_field(); ?>
+        <input type="hidden" name="_method" value="PUT">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Edit <?= $title ?? null; ?></h6>
             </div>
@@ -11,7 +12,7 @@
                 <div class="container">
                     <div class="form-group">
                         <label for="kode">Kode pegawai</label>
-                        <input type="text" name="kode" id="kode" class="form-control" value="<?= $pegawai['kode']; ?>" readonly>
+                        <input type="text" name="kode" id="kode" class="form-control" value="<?= $pegawai['kode'] ?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama pegawai</label>
@@ -52,16 +53,6 @@
                         <textarea name="alamat" id="alamat" class="form-control<?= $validation->hasError('alamat') ? ' is-invalid': null?> " cols="30" rows="5" placeholder="Masukkan alamat pegawai"><?= old('alamat') ?? $pegawai['alamat']; ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('alamat'); ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="jabatan">jabatan</label>
-                        <select name="jabatan" id="jabatan" class="form-control<?= $validation->hasError('jabatan') ? 'is-invalid': null?>">
-                            <option value="Karyawan" <?= (old('jabatan') ?? $pegawai['jabatan']) == 'Karyawan' ? 'selected' : null; ?>>Karyawan</option>
-                            <option value="Admin" <?= (old('jabatan') ?? $pegawai['jabatan']) == 'Admin' ? 'selected' : null; ?>>Admin</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('jabatan'); ?>
                         </div>
                     </div>
                 </div>

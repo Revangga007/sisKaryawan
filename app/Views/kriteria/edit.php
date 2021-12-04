@@ -3,6 +3,7 @@
 <?= $this->section('content'); ?>
     <div class="card shadow mb-4">
         <form action="<?= base_url('kriteria/update/'.$kriteria['kode']); ?>" method="post">
+            <input type="hidden" name="_method" value="PUT">
             <?= csrf_field(); ?>
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Edit <?= $title ?? null; ?></h6>

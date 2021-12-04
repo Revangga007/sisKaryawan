@@ -31,11 +31,41 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'dashboard::index');
 $routes->get('login', 'auth::login');
+$routes->post('login', 'auth::login_action');
+$routes->get('logout', 'auth::logout');
+$routes->get('/', 'dashboard::index', ['filter' => 'auth']);
 
-// $routes->delete('/kriteria/delete/(:any)', 'Kriteria::delete/$1');
+$routes->group('kriteria',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'kriteria::index');
+    $routes->get('create', 'kriteria::create');
+    $routes->post('store', 'kriteria::store');
+    $routes->get('edit/(:any)', 'kriteria::edit/$1');
+    $routes->put('update/(:any)', 'kriteria::update/$1');
+    $routes->delete('delete/(:any)', 'kriteria::delete/$1');
+});
 
+$routes->group('pegawai',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'pegawai::index');
+    $routes->get('create', 'pegawai::create');
+    $routes->post('store', 'pegawai::store');
+    $routes->get('edit/(:any)', 'pegawai::edit/$1');
+    $routes->put('update/(:any)', 'pegawai::update/$1');
+    $routes->delete('delete/(:any)', 'pegawai::delete/$1');
+});
+
+$routes->group('users',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'users::index');
+    $routes->get('create', 'users::create');
+    $routes->post('store', 'users::store');
+    $routes->get('edit/(:any)', 'users::edit/$1');
+    $routes->put('update/(:any)', 'users::update/$1');
+    $routes->delete('delete/(:any)', 'users::delete/$1');
+});
+
+$routes->group('alternatif',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'alternatif::index');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

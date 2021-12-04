@@ -54,16 +54,6 @@
                             <?= $validation->getError('alamat'); ?>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="jabatan">jabatan</label>
-                        <select name="jabatan" id="jabatan" class="form-control<?= $validation->hasError('jabatan') ? 'is-invalid': null?>">
-                            <option value="Karyawan" <?= old('jabatan') == 'Karyawan' ? 'selected' : null; ?>>Karyawan</option>
-                            <option value="Admin" <?= old('jabatan') == 'Admin' ? 'selected' : null; ?>>Admin</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('jabatan'); ?>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="card-footer">

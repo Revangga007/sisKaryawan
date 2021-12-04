@@ -16,7 +16,7 @@ class Kriteria extends BaseController
     public function index()
     {
         $data['title'] = $this->title;
-        $data['kriterias'] = $this->model->getData();
+        $data['kriterias'] = $this->model->findAll();
         return view('kriteria/index', $data);
     }
 
@@ -44,7 +44,7 @@ class Kriteria extends BaseController
            'status' => $this->request->getPost('status')
        ];
        if($validation->run($kriteria, 'kriteria')){
-           $this->model->storeData($kriteria);
+           $this->model->save($kriteria);
            session()->setFlashdata('success', 'Data kriteria berhasil disimpan');
            return redirect()->to(base_url('kriteria'));
        } else {
@@ -56,7 +56,7 @@ class Kriteria extends BaseController
     {
         session();
         $data['title'] = $this->title;
-        $data['kriteria'] = $this->model->getData($kode)->getRowArray();
+        $data['kriteria'] = $this->model->where(['kode' => $kode])->first();
         $data['validation'] = \Config\Services::validation();
         return view('kriteria/edit', $data);
     }
@@ -71,17 +71,17 @@ class Kriteria extends BaseController
            'status' => $this->request->getPost('status')
         ];
         if($validation->run($kriteria, 'kriteria')){
-           $this->model->updateData($kriteria,$kode);
-           session()->setFlashdata('success', 'Data kriteria berhasil disimpan');
+           $this->model->save($kriteria,['kode' => $kode]);
+           session()->setFlashdata('success', 'Data kriteria berhasil diubah');
            return redirect()->to(base_url('kriteria'));
         } else {
-            return redirect()->to(base_url('kriteria/create'))->withInput()->with('validation', $validation);
+            return redirect()->to(base_url('kriteria/edit'.$kode))->withInput()->with('validation', $validation);
         }
     }
 
     public function delete($kode)
     {
-        $this->model->deleteData($kode);
+        $this->model->delete($kode);
         session()->setFlashdata('success', 'Data kriteria berhasil dihapus');
         return redirect()->to(base_url('kriteria'));
     }

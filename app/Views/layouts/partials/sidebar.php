@@ -12,7 +12,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <li class="nav-item <?= $title == 'Dashboard' ? 'active' : null; ?>">
         <a class="nav-link" href="<?= base_url('/'); ?>">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
@@ -53,13 +53,22 @@
             <span>Alternatif</span></a>
     </li>
     
-
+    
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-
+    <div class="sidebar-heading">
+        Support
+    </div>
+    
+    <li class="nav-item <?= $title == 'Users' ? 'active' : null; ?>">
+        <a class="nav-link" href="<?= base_url('users'); ?>">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Users</span></a>
+    </li>
+    
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
+    
 </ul>
