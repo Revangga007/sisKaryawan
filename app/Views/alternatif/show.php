@@ -4,16 +4,48 @@
     <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Nilai <?= $pegawai['nama'] ?? null; ?></h6>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalCreate_<?= $pegawai['kode']; ?>"><li class="fa fa-plus"></li>&nbsp;Input nilai</button>
+                <div class="modal fade" id="modalCreate_<?= $pegawai['kode']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel">Form input nilai <?= $pegawai['nama'] ?? null; ?></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="<?= base_url('alternatif/create/'.$pegawai['kode']); ?>" method="post">
+                                    <?= csrf_field(); ?>
+                                    <div class="form-group">
+                                        <label for="kode_kriteria">Kriteria</label>
+                                        <select name="kode_kriteria" id="kode_kriteria" class="form-control">
+                                            <?php foreach($unSelected as $kriteria) : ?>
+                                                <?php if($kriteria['kode_kriteria'] == null) : ?>
+                                                    <option value="<?=$kriteria['kode']; ?>"><?=$kriteria['nama']; ?></option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="container">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th width="5%">No</th>
                                 <th>Nama Kriteria</th>
                                 <th width="10%">Nilai Kriteria</th>
-                                <th width="25%">Aksi</th>
+                                <th width="18%">Aksi</th>
                             </tr>
                         </thead>
                     <tbody>
@@ -24,15 +56,70 @@
                                 <td><?= $kriteria['nama']; ?></td>
                                 <td>
                                     <?php foreach($alternatifs as $alternatif) : ?>
-                                        <?php if($alternatif != null) : ?>
                                             <?= $alternatif['kode_kriteria'] == $kriteria['kode'] ? $alternatif['nilai_kriteria'] : null ?>
-                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </td>
                                 <td>
-                                    <!-- Button input nilai -->
-                                    <button class="btn btn-primary btn-sm">Input</button>
-                                    <button class="btn btn-danger btn-sm"><li class="fa fa-trash"></li>&nbsp;Hapus</button>
+                                    <?php foreach($alternatifs as $alternatif) : ?>
+                                        <?php if($kriteria['kode'] == $alternatif['kode_kriteria']) :?>
+                                            <!-- button edit -->
+                                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEdit_<?= $alternatif['id']; ?>"><li class="fa fa-edit"></li>&nbsp;Edit</button>
+                                            <!-- modal edit -->
+                                            <div class="modal fade" id="modalEdit_<?= $alternatif['id']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="ModalLabel">Form Edit Data</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="<?= base_url('alternatif/update/'.$alternatif['id'])?>" method="post">
+                                                                <?= csrf_field(); ?>
+                                                                <input type="hidden" name="_method" value="PUT">
+                                                                <div class="form-group">
+                                                                    <label for="nilai">Nilai Kriteria</label>
+                                                                    <input type="text" name="nilai_kriteria" id="nilai" class="form-control" value="<?= $alternatif['nilai_kriteria']; ?>">
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-success">Update</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- button hapus -->
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus_<?= $alternatif['id']; ?>"><li class="fa fa-trash"></li>&nbsp;Hapus</button>
+                                            <!-- modal hapus -->
+                                            <div class="modal fade" id="modalHapus_<?= $alternatif['id']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="ModalLabel">Konfirmasi Hapus Data</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah anda yakin akan menghapus data <?= $kriteria['nama']; ?>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form action="<?= base_url('alternatif/delete/'.$alternatif['id'])?>" method="post">
+                                                                <?= csrf_field(); ?>
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-danger btn-danger">Konfirmasi</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

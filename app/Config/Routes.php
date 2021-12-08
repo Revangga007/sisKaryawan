@@ -21,7 +21,7 @@ $routes->setDefaultController('Dashboard');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -65,6 +65,9 @@ $routes->group('users',['filter' => 'auth'], function($routes){
 
 $routes->group('alternatif',['filter' => 'auth'], function($routes){
     $routes->get('/', 'alternatif::index');
+    $routes->get('show/(:any)', 'alternatif::show/$1');
+    $routes->put('update/(:any)', 'alternatif::update/$1');
+    $routes->delete('delete/(:any)', 'alternatif::delete/$1');
 });
 /*
  * --------------------------------------------------------------------

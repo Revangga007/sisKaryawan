@@ -21,7 +21,6 @@ class Alternatif extends BaseController
     {
         $data['title'] = $this->title;
         $data['pegawais'] = $this->modelPegawai->findAll();
-        
         return view('alternatif/index', $data);
     }
     
@@ -29,14 +28,28 @@ class Alternatif extends BaseController
         $data['title'] = $this->title;
         $data['pegawai'] = $this->modelPegawai->where(['kode' => $kode])->first();
         $data['kriterias'] = $this->modelKriteria->findAll();
-        foreach($data['kriterias'] as $kriteria){
-            $data['alternatifs'][] = $this->model->where(['kode_kriteria'=>$kriteria['kode'],'kode_pegawai'=>$kode])->first();
-        }
-        // dd($data);
-        // $data['jmlNilai'] = count($data['alternatif']);
-        // $data['alternatifs'] = $this->model->where(['kode_pegawai' => $kode])->get()->getResultArray();
+        $data['alternatifs'] = $this->model->where(['kode_pegawai' => $kode])->get()->getResultArray();
+        $data['unSelected'] = $this->modelKriteria->unSelected();
         return view('alternatif/show', $data);
-        
-        
+    }
+
+    public function update($id)
+    {
+        $data = $this->model->select('kode_pegawai')->where(['id' => $id])->first();
+        // $nilai_kriteria = ($this->request->getPost('nilai_kriteria'));
+        $this->model->save([
+            'id' => $id,
+            'nilai_kriteria' => $this->request->getPost('nilai_kriteria')
+        ]);
+        session()->setFlashdata('success', 'Data alternatif berhasil diubah');
+        return redirect()->to(base_url('alternatif/show/'.$data['kode_pegawai']));
+    }
+
+    public function delete($id)
+    {
+        $data = $this->model->select('kode_pegawai')->where(['id' => $id])->first();
+        $this->model->delete($id);
+        session()->setFlashdata('success', 'Data alternatif berhasil dihapus');
+        return redirect()->to(base_url('alternatif/show/'.$data['kode_pegawai']));
     }
 }

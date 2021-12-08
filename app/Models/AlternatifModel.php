@@ -12,11 +12,11 @@ class AlternatifModel extends Model
     protected $useTimestamps    = true;
 
     public function getJoinData($kode){
-        return $this->db->table('alternatif')
-        ->select('')
-        ->join('pegawai', 'pegawai.kode=alternatif.kode_pegawai')
-        ->join('kriteria', 'kriteria.kode=alternatif.kode_kriteria')
-        ->where(['pegawai.kode' => $kode])->get()->getResultArray();
+            return $this->db->table($this->table)
+            ->join('pegawai', 'pegawai.kode=alternatif.kode_pegawai')
+            ->join('kriteria', 'kriteria.kode=alternatif.kode_kriteria')
+            ->select('pegawai.nama as nama_pegawai, kriteria.nama as nama_kriteria, alternatif.*')
+            ->where(['pegawai.kode' => $kode])->get()->getResultArray();
     }
 
 }
