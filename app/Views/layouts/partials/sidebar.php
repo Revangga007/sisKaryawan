@@ -35,7 +35,7 @@
 
     <li class="nav-item <?= $title == 'Kriteria' ? 'active' : null; ?>">
         <a class="nav-link" href="<?= base_url('kriteria'); ?>">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-fw fas fa-clipboard-list"></i>
             <span>Kriteria</span></a>
     </li>
     

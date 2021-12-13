@@ -13,7 +13,7 @@
                         <tr>
                             <th width="7%">No</th>
                             <th>Nama Pegawai</th>
-                            <th width="20%">Aksi</th>
+                            <th width="15%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,7 +21,7 @@
                         <tr>
                             <td><?= $key + 1; ?></td>
                             <td><?= $pegawai['nama']; ?></td>
-                            <td>
+                            <td class="text-center">
                                 <a href="<?= base_url('alternatif/show/'.$pegawai['kode']); ?>" class="btn btn-sm btn-primary">Detail</a>
                             </td>
                         </tr>

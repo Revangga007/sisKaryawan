@@ -59,13 +59,14 @@ class Users extends BaseController
     {
         $validation = \Config\Services::validation();
         $user = [
+           'id' => $id,
            'nama'   => $this->request->getPost('nama'),
            'username'  => $this->request->getPost('username'),
            'password'  => $this->request->getPost('password'),
            'role' => $this->request->getPost('role'),
         ];
         if($validation->run($user, 'user')){
-           $this->model->save($user,['id' => $id]);
+           $this->model->save($user);
            session()->setFlashdata('success', 'Data user berhasil diupdate');
            return redirect()->to(base_url('users'));
         } else {

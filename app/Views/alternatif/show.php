@@ -4,7 +4,7 @@
     <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Nilai <?= $pegawai['nama'] ?? null; ?></h6>
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalCreate_<?= $pegawai['kode']; ?>"><li class="fa fa-plus"></li>&nbsp;Input nilai</button>
+                <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalCreate_<?= $pegawai['kode']; ?>"><li class="fa fa-plus"></li>&nbsp;Input nilai</button>
                 <div class="modal fade" id="modalCreate_<?= $pegawai['kode']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -17,19 +17,22 @@
                             <div class="modal-body">
                                 <form action="<?= base_url('alternatif/create/'.$pegawai['kode']); ?>" method="post">
                                     <?= csrf_field(); ?>
+                                    <input type="hidden" name="kode_pegawai" value="<?= $pegawai['kode']; ?>">
                                     <div class="form-group">
                                         <label for="kode_kriteria">Kriteria</label>
                                         <select name="kode_kriteria" id="kode_kriteria" class="form-control">
-                                            <?php foreach($unSelected as $kriteria) : ?>
-                                                <?php if($kriteria['kode_kriteria'] == null) : ?>
-                                                    <option value="<?=$kriteria['kode']; ?>"><?=$kriteria['nama']; ?></option>
-                                                <?php endif; ?>
+                                            <?php foreach($unSelected as $kriteria): ?>
+                                                <option value="<?=$kriteria['kode']; ?>"><?=$kriteria['nama']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="nilai_kriteria">Nilai</label>
+                                        <input type="number" name="nilai_kriteria" id="nilai_kriteria" class="form-control">
+                                    </div>
                             </div>
                             <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn-success">Simpan</button>
                                 </form>
                             </div>
@@ -129,9 +132,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                <div class="container d-flex justify-content-between">
+                <div class="container">
                     <a href="<?= base_url('alternatif'); ?>" class="btn btn-sm btn-outline-danger"><li class="fa fa-arrow-left"></li>&nbsp;Kembali</a>
-                    <button class="btn btn-sm btn-success"><li class="fa fa-save"></li>&nbsp;Simpan</button>
                 </div>
             </div>
         </form>

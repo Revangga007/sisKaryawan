@@ -54,10 +54,10 @@ class Validation
     ];
 
     public $user = [
-        'nama'  => 'required',
-        'username' => 'required',
-        'password' => 'required',
-        'role' => 'required',
+        'nama'      => 'required',
+        'username'  => 'required',
+        'password'  => 'required',
+        'role'      => 'required',
     ];
 
     public $kriteria_errors = [
@@ -89,16 +89,16 @@ class Validation
 
     public $user_errors = [
         'nama'  =>[
-            'required'   => 'Nama pegawai harus diisi',
+            'required'   => 'Nama user harus diisi',
         ],
         'username'=>[
-            'required'   => 'Nama harus diisi',
+            'required'   => 'username user harus diisi',
         ],
         'password'=>[
-            'required'   => 'Password harus diisi',
+            'required'   => 'Password user harus diisi',
         ],
         'role'=>[
-            'required'   => 'Role harus diisi',
+            'required'   => 'Role user harus diisi',
         ]
     ];
 }
