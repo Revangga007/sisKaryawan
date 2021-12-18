@@ -29,16 +29,16 @@
                         <label for="role">Role</label>
                         <select name="role" id="role" class="form-control">
                             <option selected disabled>Pilih role</option>
-                            <option value="pimpinan" <?= (old('role') ?? $user['role'])=='pimpinan' ? 'selected' : null; ?>>Pimpinan</option>
                             <option value="admin" <?= (old('role') ?? $user['role'])=='admin' ? 'selected' : null; ?>>Admin</option>
+                            <option value="tu" <?= (old('role') ?? $user['role'])=='' ? 'selected' : null; ?>>Kasubag Tu</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="container d-flex justify-content-between">
-                    <a href="<?= base_url('users'); ?>" class="btn btn-sm btn-outline-danger"><li class="fa fa-arrow-left"></li>&nbsp;Kembali</a>
-                    <button type="submit" class="btn btn-sm btn-success"><li class="fa fa-save"></li>&nbsp;Simpan</button>
+                    <a href="<?= base_url('users'); ?>" class="btn btn-sm btn-outline-danger"><li class="fas fa-arrow-left"></li>&nbsp;Kembali</a>
+                    <button type="submit" class="btn btn-sm btn-success"><li class="fas fa-save"></li>&nbsp;Simpan</button>
                 </div>
             </div>
         </form>

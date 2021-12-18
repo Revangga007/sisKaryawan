@@ -47,10 +47,12 @@ class Validation
     ];
 
     public $pegawai = [
-        'nama'  => 'required',
-        'jekel' => 'required',
-        'no_hp' => 'required',
-        'alamat'=> 'required',
+        'nama'      => 'required',
+        'jekel'     => 'required',
+        'no_hp'     => 'required',
+        'alamat'    => 'required',
+        'username'  => 'required',
+        'password'  => 'required'
     ];
 
     public $user = [
@@ -84,6 +86,12 @@ class Validation
         ],
         'alamat'  =>[
             'required'   => 'Alamat pegawai harus diisi',
+        ],
+        'username'=>[
+            'required'   => 'Username pegawai harus diisi',
+        ],
+        'password'=>[
+            'required'   => 'Password pegawai harus diisi',
         ],
     ];
 

@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label for="bobot">Bobot Kriteria</label>
-                        <input type="number" step="0.01" min="0.00" max="1.00" name="bobot" id="bobot" class="form-control <?= $validation->hasError('bobot') ? 'is-invalid': null; ?>" placeholder="Masukkan Bobot Kriteria" value="<?= old('bobot') ?? $kriteria['bobot']; ?>">
+                        <input type="number" name="bobot" id="bobot" class="form-control <?= $validation->hasError('bobot') ? 'is-invalid': null; ?>" placeholder="Masukkan Bobot Kriteria" value="<?= old('bobot') ?? $kriteria['bobot']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('bobot'); ?>
                         </div>
@@ -43,8 +43,8 @@
             </div>
             <div class="card-footer">
                 <div class="container d-flex justify-content-between">
-                    <a href="<?= base_url('kriteria'); ?>" class="btn btn-sm btn-outline-danger"><li class="fa fa-arrow-left"></li>&nbsp;Kembali</a>
-                    <button type="submit" class="btn btn-sm btn-success"><li class="fa fa-save"></li>&nbsp;Simpan</button>
+                    <a href="<?= base_url('kriteria'); ?>" class="btn btn-sm btn-outline-danger"><li class="fas fa-arrow-left"></li>&nbsp;Kembali</a>
+                    <button type="submit" class="btn btn-sm btn-success"><li class="fas fa-save"></li>&nbsp;Simpan</button>
                 </div>
             </div>
         </form>

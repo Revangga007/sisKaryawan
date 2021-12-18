@@ -4,7 +4,7 @@
     <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Nilai <?= $pegawai['nama'] ?? null; ?></h6>
-                <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalCreate_<?= $pegawai['kode']; ?>"><li class="fa fa-plus"></li>&nbsp;Input nilai</button>
+                <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalCreate_<?= $pegawai['kode']; ?>"><li class="fas fa-plus"></li>&nbsp;Input nilai</button>
                 <div class="modal fade" id="modalCreate_<?= $pegawai['kode']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -66,7 +66,7 @@
                                     <?php foreach($alternatifs as $alternatif) : ?>
                                         <?php if($kriteria['kode'] == $alternatif['kode_kriteria']) :?>
                                             <!-- button edit -->
-                                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEdit_<?= $alternatif['id']; ?>"><li class="fa fa-edit"></li>&nbsp;Edit</button>
+                                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEdit_<?= $alternatif['id']; ?>"><li class="fas fa-edit"></li>&nbsp;Edit</button>
                                             <!-- modal edit -->
                                             <div class="modal fade" id="modalEdit_<?= $alternatif['id']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -96,7 +96,7 @@
                                             </div>
 
                                             <!-- button hapus -->
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus_<?= $alternatif['id']; ?>"><li class="fa fa-trash"></li>&nbsp;Hapus</button>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus_<?= $alternatif['id']; ?>"><li class="fas fa-trash"></li>&nbsp;Hapus</button>
                                             <!-- modal hapus -->
                                             <div class="modal fade" id="modalHapus_<?= $alternatif['id']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -133,7 +133,7 @@
             </div>
             <div class="card-footer">
                 <div class="container">
-                    <a href="<?= base_url('alternatif'); ?>" class="btn btn-sm btn-outline-danger"><li class="fa fa-arrow-left"></li>&nbsp;Kembali</a>
+                    <a href="<?= base_url('alternatif'); ?>" class="btn btn-sm btn-outline-danger"><li class="fas fa-arrow-left"></li>&nbsp;Kembali</a>
                 </div>
             </div>
         </form>

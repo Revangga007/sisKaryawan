@@ -28,6 +28,15 @@ class Pegawai extends Migration
             'alamat'    => [
                 'type'          => 'TEXT',
             ],
+            'username' => [
+                'type'          => 'VARCHAR',
+                'constraint'    => 100,
+                'unique'        => TRUE
+            ],
+            'password' => [
+                'type'          => 'VARCHAR',
+                'constraint'    => 255
+            ],
             'created_at'    => [
                 'type'          => 'DATETIME',
                 'null'          => TRUE

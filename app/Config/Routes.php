@@ -65,10 +65,15 @@ $routes->group('users',['filter' => 'auth'], function($routes){
 
 $routes->group('alternatif',['filter' => 'auth'], function($routes){
     $routes->get('/', 'alternatif::index');
+    $routes->get('reset', 'alternatif::reset');
     $routes->get('show/(:any)', 'alternatif::show/$1');
     $routes->post('create/(:any)', 'alternatif::create/$1');
     $routes->put('update/(:any)', 'alternatif::update/$1');
     $routes->delete('delete/(:any)', 'alternatif::delete/$1');
+});
+
+$routes->group('perhitungan', ['filter' => 'auth'], function($routes){
+    $routes->get('/', 'perhitungan::index');
 });
 /*
  * --------------------------------------------------------------------

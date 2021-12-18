@@ -18,7 +18,7 @@ class Kriteria extends Migration
                 'constraint'    => '255'
             ],
             'bobot' => [
-                'type'          => 'DOUBLE',
+                'type'          => 'INT',
             ],
             'status'        => [
                 'type'          => 'ENUM',

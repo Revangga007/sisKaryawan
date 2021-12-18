@@ -24,11 +24,11 @@
                             <td><?= $key + 1; ?></td>
                             <td><?= $user['nama']; ?></td>
                             <td><?= $user['username']; ?></td>
-                            <td><?= $user['role']; ?></td>
+                            <td><?= $user['role'] == 'admin' ? 'Admin' : 'Kasubag TU' ?></td>
                             <td>
-                                <a href="<?= base_url('users/edit/'.$user['id']); ?>" class="btn btn-sm btn-warning"><li class="fa fa-edit"></li>&nbsp;Edit</a>
+                                <a href="<?= base_url('users/edit/'.$user['id']); ?>" class="btn btn-sm btn-warning"><li class="fas fa-edit"></li>&nbsp;Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapus_<?= $user['id']; ?>">
-                                    <li class="fa fa-trash"></li>
+                                    <li class="fas fa-trash"></li>
                                     &nbsp;Hapus
                                 </button>
                                 <!-- Modal Hapus -->

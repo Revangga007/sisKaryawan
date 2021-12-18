@@ -54,12 +54,26 @@
                             <?= $validation->getError('alamat'); ?>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" class="form-control<?= $validation->hasError('username') ? ' is-invalid': null?>" placeholder="Masukkan username pegawai" value="<?= old('username'); ?>">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('username'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control<?= $validation->hasError('password') ? ' is-invalid': null?>" placeholder="Masukkan password pegawai" value="<?= old('password'); ?>">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('password'); ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="container d-flex justify-content-between">
-                    <a href="<?= base_url('pegawai'); ?>" class="btn btn-sm btn-outline-danger"><li class="fa fa-arrow-left"></li>&nbsp;Kembali</a>
-                    <button class="btn btn-sm btn-success"><li class="fa fa-save"></li>&nbsp;Simpan</button>
+                    <a href="<?= base_url('pegawai'); ?>" class="btn btn-sm btn-outline-danger"><li class="fas fa-arrow-left"></li>&nbsp;Kembali</a>
+                    <button class="btn btn-sm btn-success"><li class="fas fa-save"></li>&nbsp;Simpan</button>
                 </div>
             </div>
         </form>

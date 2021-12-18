@@ -5,6 +5,7 @@
         <form action="<?= base_url('pegawai/update/'.$pegawai['kode']); ?>" method="post">
         <?= csrf_field(); ?>
         <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="password" value="<?= $pegawai['password'] ?>">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Edit <?= $title ?? null; ?></h6>
             </div>
@@ -55,12 +56,19 @@
                             <?= $validation->getError('alamat'); ?>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="no_hp">Username</label>
+                        <input type="text" name="username" id="username" class="form-control<?= $validation->hasError('username') ? ' is-invalid': null?>" placeholder="Masukkan username pegawai" value="<?= old('username') ?? $pegawai['username']; ?>">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('username'); ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="container d-flex justify-content-between">
-                    <a href="<?= base_url('pegawai'); ?>" class="btn btn-sm btn-outline-danger"><li class="fa fa-arrow-left"></li>&nbsp;Kembali</a>
-                    <button class="btn btn-sm btn-success"><li class="fa fa-save"></li>&nbsp;Simpan</button>
+                    <a href="<?= base_url('pegawai'); ?>" class="btn btn-sm btn-outline-danger"><li class="fas fa-arrow-left"></li>&nbsp;Kembali</a>
+                    <button class="btn btn-sm btn-success"><li class="fas fa-save"></li>&nbsp;Simpan</button>
                 </div>
             </div>
         </form>

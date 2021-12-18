@@ -50,6 +50,14 @@
                                             <input type="password" class="form-control form-control-user"
                                                 id="password" name="password" placeholder="Masukkan Password" value="<?= old('password'); ?>">
                                         </div>
+                                        <div class="form-group my-4">
+                                            <select name="role" id="role" class="form-control">
+                                                <option disabled selected>Pilih role</option>
+                                                <option value="pegawai">Pegawai</option>
+                                                <option value="tu">Kasubag TU</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+                                        </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>

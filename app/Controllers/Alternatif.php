@@ -62,4 +62,11 @@ class Alternatif extends BaseController
         session()->setFlashdata('success', 'Data alternatif berhasil dihapus');
         return redirect()->to(base_url('alternatif/show/'.$data['kode_pegawai']));
     }
+
+    public function reset()
+    {
+        $this->model->emptyTable('alternatif');
+        session()->setFlashdata('success', 'Data alternatif berhasil dihapus');
+        return redirect()->to(base_url('kriteria'));
+    }
 }

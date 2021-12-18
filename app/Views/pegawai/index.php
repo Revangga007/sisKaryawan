@@ -4,7 +4,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Daftar <?= $title ?? null; ?></h6>
-            <a href="<?= base_url('pegawai/create'); ?>" class="btn btn-outline-primary btn-sm"><li class="fa fa-plus"></li> Tambah</a>
+            <a href="<?= base_url('pegawai/create'); ?>" class="btn btn-outline-primary btn-sm"><li class="fas fa-plus"></li> Tambah</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -17,6 +17,7 @@
                             <th>Jekel</th>
                             <th>No.HP</th>
                             <th>Alamat</th>
+                            <th>Username</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -29,10 +30,11 @@
                             <td><?= $pegawai['jekel']; ?></td>
                             <td><?= $pegawai['no_hp']; ?></td>
                             <td><?= $pegawai['alamat']; ?></td>
+                            <td><?= $pegawai['username']; ?></td>
                             <td>
-                                <a href="<?= base_url('pegawai/edit/'.$pegawai['kode']); ?>" class="btn btn-sm btn-warning"><li class="fa fa-edit"></li>&nbsp;Edit</a>
+                                <a href="<?= base_url('pegawai/edit/'.$pegawai['kode']); ?>" class="btn btn-sm btn-warning"><li class="fas fa-edit"></li>&nbsp;Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapus_<?= $pegawai['kode']; ?>">
-                                    <li class="fa fa-trash"></li>
+                                    <li class="fas fa-trash"></li>
                                     &nbsp;Hapus
                                 </button>
                                 <!-- Modal Hapus -->

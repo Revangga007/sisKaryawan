@@ -36,12 +36,15 @@ class Pegawai extends BaseController
     public function store()
     {
        $validation = \Config\Services::validation();
+    //    dd($this->request->getPost());
        $pegawai = [
-           'kode'   => $this->request->getPost('kode'),
-           'nama'   => $this->request->getPost('nama'),
-           'jekel'  => $this->request->getPost('jekel'),
-           'no_hp'  => $this->request->getPost('no_hp'),
-           'alamat' => $this->request->getPost('alamat'),
+           'kode'       => $this->request->getPost('kode'),
+           'nama'       => $this->request->getPost('nama'),
+           'jekel'      => $this->request->getPost('jekel'),
+           'no_hp'      => $this->request->getPost('no_hp'),
+           'alamat'     => $this->request->getPost('alamat'),
+           'username'   => $this->request->getPost('username'),
+           'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
        ];
        if($validation->run($pegawai, 'pegawai')){
            $this->model->save($pegawai);
@@ -65,11 +68,14 @@ class Pegawai extends BaseController
     {
         $validation = \Config\Services::validation();
         $pegawai = [
-           'kode'   => $this->request->getPost('kode'),
-           'nama'   => $this->request->getPost('nama'),
-           'jekel'  => $this->request->getPost('jekel'),
-           'no_hp'  => $this->request->getPost('no_hp'),
-           'alamat' => $this->request->getPost('alamat'),
+           'kode'       => $this->request->getPost('kode'),
+           'nama'       => $this->request->getPost('nama'),
+           'jekel'      => $this->request->getPost('jekel'),
+           'no_hp'      => $this->request->getPost('no_hp'),
+           'alamat'     => $this->request->getPost('alamat'),
+           'username'   => $this->request->getPost('username'),
+           'password'   => $this->request->getPost('password'),
+
         ];
         if($validation->run($pegawai, 'pegawai')){
            $this->model->save($pegawai,['kode' => $kode]);
