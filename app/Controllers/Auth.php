@@ -26,12 +26,12 @@ class Auth extends BaseController
             $pegawai = $pegawaiModel->where(['username' => $auth['username']])->first();
             if($pegawai) {
                 if(password_verify($auth['password'], $pegawai['password'])){
-                    $session_data['id'] = $pegawai['id'];
+                    $session_data['id'] = $pegawai['kode'];
                     $session_data['nama'] = $pegawai['nama'];
                     $session_data['username'] = $pegawai['username'];
-                    $session_data['role'] = $pegawai['role'];
+                    $session_data['role'] = 'pegawai';
                     session()->set($session_data);
-                    return redirect()->to(base_url('/'));
+                    return redirect()->to(base_url('/pegawai/profil'));
                 } else {
                     return redirect()->to(base_url('login'))->withInput()->with('danger', 'Password tidak sesuai!');
                 }

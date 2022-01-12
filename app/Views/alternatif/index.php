@@ -20,7 +20,12 @@
                         <?php foreach($pegawais as $key => $pegawai) : ?>
                         <tr>
                             <td><?= $key + 1; ?></td>
-                            <td><?= $pegawai['nama']; ?></td>
+                            <td>
+                                <?= $pegawai['nama']; ?>
+                                <?php if($pegawai['alternatif'] < $kriteria) : ?>
+                                <span class="badge badge-secondary float-right">Tidak Lengkap</span>
+                                <?php endif; ?>
+                            </td>
                             <td class="text-center">
                                 <a href="<?= base_url('alternatif/show/'.$pegawai['kode']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-list"></i> Detail</a>
                             </td>

@@ -9,7 +9,7 @@ class HistoryHeaderModel extends Model
     protected $table            = 'historyheader';
     protected $primaryKey       = 'id';
     protected $useTimestamps = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['periode_awal', 'periode_akhir'];
 
 
 }

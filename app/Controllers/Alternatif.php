@@ -20,7 +20,9 @@ class Alternatif extends BaseController
     public function index()
     {
         $data['title'] = $this->title;
-        $data['pegawais'] = $this->modelPegawai->findAll();
+        $modelKriteria = new KriteriaModel();
+        $data['kriteria'] = $modelKriteria->countAll();
+        $data['pegawais'] = $this->modelPegawai->countAlternatif();
         return view('alternatif/index', $data);
     }
 
@@ -66,7 +68,7 @@ class Alternatif extends BaseController
     public function reset()
     {
         $this->model->emptyTable('alternatif');
-        session()->setFlashdata('success', 'Data alternatif berhasil dihapus');
-        return redirect()->to(base_url('kriteria'));
+        session()->setFlashdata('success', 'Data alternatif berhasil direset');
+        return redirect()->to(base_url('alternatif'));
     }
 }

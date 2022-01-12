@@ -18,4 +18,15 @@ class PegawaiModel extends Model
         WHERE alternatif.kode_pegawai = '$kode')")->getResultArray();
         return $result;
     }
+
+    public function countAlternatif()
+    {
+        $result = $this->join("alternatif", "alternatif.kode_pegawai = pegawai.kode", "left")
+        ->select('pegawai.kode,pegawai.nama,count(alternatif.id) as alternatif')
+        ->groupBy('pegawai.kode')
+        ->orderBy('pegawai.created_at', 'ASC')
+        ->get()->getResultArray();
+        return $result;
+    }
+    
 }

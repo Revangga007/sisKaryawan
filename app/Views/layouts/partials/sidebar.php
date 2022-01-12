@@ -13,7 +13,11 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item <?= $title == 'Dashboard' ? 'active' : null; ?>">
-        <a class="nav-link" href="<?= base_url('/'); ?>">
+        <?php if(session('role') != 'pegawai') : ?>
+            <a class="nav-link" href="<?= base_url('/'); ?>">
+        <?php else : ?>
+            <a class="nav-link" href="<?= base_url('/pegawai/profil'); ?>">
+        <?php endif; ?>
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
@@ -61,7 +65,14 @@
                 <i class="fas fa-fw fa-book"></i>
                 <span>History</span></a>
         </li>
-    <?php endif; ?> 
+    <?php endif; ?>
+    <?php if(session("role") == 'pegawai') : ?>
+        <li class="nav-item <?= $title == 'ranking' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?= base_url('/pegawai/ranking'); ?>">
+                <i class="fas fa-fw fa-star"></i>
+                <span>Ranking</span></a>
+        </li>
+    <?php endif; ?>
     
     <!-- Divider -->
     <?php if(session("role") == 'admin') : ?>

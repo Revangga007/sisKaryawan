@@ -25,6 +25,11 @@ class HistoryDetail extends Migration
             'ranking' => [
                 'type'          => 'INT'
             ],
+            'header_id' => [
+                'type'          => 'BIGINT',
+                'constraint'    => 20,
+                'unsigned'      => true,               
+            ],
             'created_at'    => [
                 'type'          => 'DATETIME',
                 'null'          => TRUE
@@ -35,6 +40,7 @@ class HistoryDetail extends Migration
             ]
         ]);
         $this->forge->addKey('id');
+        $this->forge->addForeignKey('header_id', 'historyheader', 'id');
         $this->forge->createTable('historydetail');
     }
 

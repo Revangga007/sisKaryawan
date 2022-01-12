@@ -52,6 +52,8 @@ $routes->group('pegawai',['filter' => 'auth'], function($routes){
     $routes->get('edit/(:any)', 'pegawai::edit/$1');
     $routes->put('update/(:any)', 'pegawai::update/$1');
     $routes->delete('delete/(:any)', 'pegawai::delete/$1');
+    $routes->get('profil', 'profil::index');
+    $routes->get('ranking', 'profil::ranking');
 });
 
 $routes->group('users',['filter' => 'auth'], function($routes){
@@ -74,7 +76,15 @@ $routes->group('alternatif',['filter' => 'auth'], function($routes){
 
 $routes->group('perhitungan', ['filter' => 'auth'], function($routes){
     $routes->get('/', 'perhitungan::index');
+    $routes->post('store', 'perhitungan::store');
 });
+
+$routes->group('history', ['filter' => 'auth'], function($routes){
+    $routes->get('/', 'history::index');
+    $routes->get('generate/(:any)', 'history::generate/$1');
+    $routes->delete('delete/(:any)', 'history::delete/$1');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

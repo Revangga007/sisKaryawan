@@ -15,7 +15,7 @@ class Pegawai extends BaseController
     public function index()
     {
         $data['title'] = $this->title;
-        $data['pegawais'] = $this->model->findAll();
+        $data['pegawais'] = $this->model->orderBy('created_at', 'ASC')->get()->getResultArray();
         return view('pegawai/index', $data);
     }
 

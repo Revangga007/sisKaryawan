@@ -37,10 +37,15 @@ class Kriteria extends BaseController
     public function store()
     {
        $validation = \Config\Services::validation();
+       if($this->request->getPost('status') == 'benefit'){
+           $bobot = $this->request->getPost('bobot');
+       } else {
+           $bobot = -($this->request->getPost('bobot'));
+       }
        $kriteria = [
            'kode'   => $this->request->getPost('kode'),
            'nama'   => $this->request->getPost('nama'),
-           'bobot'  => $this->request->getPost('bobot'),
+           'bobot'  => $bobot,
            'status' => $this->request->getPost('status')
        ];
        if($validation->run($kriteria, 'kriteria')){
@@ -64,10 +69,15 @@ class Kriteria extends BaseController
     public function update($kode)
     {
         $validation = \Config\Services::validation();
+        if($this->request->getPost('status') == 'benefit'){
+            $bobot = $this->request->getPost('bobot');
+        } else {
+            $bobot = -($this->request->getPost('bobot'));
+        }
         $kriteria = [
            'kode'   => $this->request->getPost('kode'),
            'nama'   => $this->request->getPost('nama'),
-           'bobot'  => $this->request->getPost('bobot'),
+           'bobot'  => $bobot,
            'status' => $this->request->getPost('status')
         ];
         if($validation->run($kriteria, 'kriteria')){
