@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
     <meta name="description" content="Sistem pemilihan karyawan terbaik">
     <meta name="author" content="riki kurniawan">
 
-    <title>login - sisKaryawan</title>
+    <title>login - SPK Museum Batik</title>
 
     <link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/css/all.min.css') ?>" rel="stylesheet" type="text/css">
@@ -23,17 +24,19 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
             <div class="col-5">
-                <h1 class="text-center text-white mt-5"><li class="fas fa-medal"></li>&nbsp;SisKaryawan</h1>
+                <h1 class="text-center text-white mt-5">
+                    <li class="fas fa-medal"></li>&nbsp;SPK Museum Batik
+                </h1>
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col">
-                               <div class="p-5">
+                                <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Halaman Login</h1>
                                     </div>
-                                     <?php if (!empty(session()->getFlashdata('danger'))) : ?>
+                                    <?php if (!empty(session()->getFlashdata('danger'))) : ?>
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             <?= session()->getFlashData('danger') ?>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -41,14 +44,12 @@
                                             </button>
                                         </div>
                                     <?php endif; ?>
-                                    <form class="user" action="<?= base_url('login'); ?>" method="post" >
+                                    <form class="user" action="<?= base_url('login'); ?>" method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="username" name="username" placeholder="Masukkan Username" value="<?= old('username'); ?>">   
+                                            <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Masukkan Username" value="<?= old('username'); ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Masukkan Password" value="<?= old('password'); ?>">
+                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Masukkan Password" value="<?= old('password'); ?>">
                                         </div>
                                         <div class="form-group my-4">
                                             <select name="role" id="role" class="form-control">

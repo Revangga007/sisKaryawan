@@ -8,6 +8,7 @@
         <input type="hidden" name="password" value="<?= $pegawai['password'] ?>">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Edit <?= $title ?? null; ?></h6>
+                <a href="<?= base_url('pegawai/edit-password/'.$pegawai['kode']); ?>" class="btn btn-outline-primary btn-sm"><i class="fas fa-key"></i> Ubah Password</a>
             </div>
             <div class="card-body">
                 <div class="container">
@@ -17,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama pegawai</label>
-                        <input type="text" name="nama" id="nama" class="form-control<?= $validation->hasError('nama') ? ' is-invalid': null?>" placeholder="Masukkan Nama pegawai" onkeyup="namaFormat();" value="<?= old('nama') ?? $pegawai['nama']; ?>">
+                        <input type="text" name="nama" id="nama" class="form-control<?= $validation->hasError('nama') ? ' is-invalid': null ?>" placeholder="Masukkan Nama pegawai" onkeyup="namaFormat();" value="<?= old('nama') ?? $pegawai['nama']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('nama'); ?>
                         </div>
@@ -44,23 +45,33 @@
                     </div>
                     <div class="form-group">
                         <label for="no_hp">No.handphone pegawai</label>
-                        <input type="text" name="no_hp" id="no_hp" class="form-control<?= $validation->hasError('no_hp') ? ' is-invalid': null?>" placeholder="Masukkan no.handphone pegawai" value="<?= old('no_hp') ?? $pegawai['no_hp'] ?>">
+                        <input type="text" name="no_hp" id="no_hp" class="form-control<?= $validation->hasError('no_hp') ? ' is-invalid': null ?>" placeholder="Masukkan no.handphone pegawai" value="<?= old('no_hp') ?? $pegawai['no_hp'] ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('no_hp'); ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat pegawai</label>
-                        <textarea name="alamat" id="alamat" class="form-control<?= $validation->hasError('alamat') ? ' is-invalid': null?> " cols="30" rows="5" placeholder="Masukkan alamat pegawai"><?= old('alamat') ?? $pegawai['alamat']; ?></textarea>
+                        <textarea name="alamat" id="alamat" class="form-control<?= $validation->hasError('alamat') ? ' is-invalid': null ?> " cols="30" rows="5" placeholder="Masukkan alamat pegawai"><?= old('alamat') ?? $pegawai['alamat']; ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('alamat'); ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="no_hp">Username</label>
-                        <input type="text" name="username" id="username" class="form-control<?= $validation->hasError('username') ? ' is-invalid': null?>" placeholder="Masukkan username pegawai" value="<?= old('username') ?? $pegawai['username']; ?>">
+                        <input type="text" name="username" id="username" class="form-control<?= $validation->hasError('username') ? ' is-invalid': null ?>" placeholder="Masukkan username pegawai" value="<?= old('username') ?? $pegawai['username']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('username'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="Aktif" <?= (old('status') ?? $pegawai['status']) == 'Aktif' ? 'selected' : null;  ?>>Aktif</option>
+                            <option value="Tidak Aktif" <?= (old('status') ?? $pegawai['status']) == 'Tidak Aktif' ? 'selected' : null;  ?>>Tidak Aktif</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('status'); ?>
                         </div>
                     </div>
                 </div>

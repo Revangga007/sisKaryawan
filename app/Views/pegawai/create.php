@@ -68,6 +68,16 @@
                             <?= $validation->getError('password'); ?>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Tidak Aktif">Tidak Aktif</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('status'); ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">

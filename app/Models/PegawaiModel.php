@@ -10,7 +10,7 @@ class PegawaiModel extends Model
     protected $primaryKey       = 'kode';
     protected $useAutoIncrement = false;
     protected $useTimestamps    = true;
-    protected $allowedFields    = ['kode', 'nama', 'jekel', 'no_hp', 'alamat', 'username', 'password'];
+    protected $allowedFields    = ['kode', 'nama', 'jekel', 'no_hp', 'alamat', 'username', 'password', 'status'];
  
     public function unSelected($kode){
         $result = $this->db->query("SELECT * FROM `pegawai` CROSS JOIN `kriteria` WHERE kriteria.kode NOT IN 
@@ -24,6 +24,7 @@ class PegawaiModel extends Model
         $result = $this->join("alternatif", "alternatif.kode_pegawai = pegawai.kode", "left")
         ->select('pegawai.kode,pegawai.nama,count(alternatif.id) as alternatif')
         ->groupBy('pegawai.kode')
+        ->where('pegawai.status','Aktif')
         ->orderBy('pegawai.created_at', 'ASC')
         ->get()->getResultArray();
         return $result;

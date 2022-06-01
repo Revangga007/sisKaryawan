@@ -37,7 +37,7 @@ class Kriteria extends BaseController
     public function store()
     {
        $validation = \Config\Services::validation();
-       if($this->request->getPost('status') == 'benefit'){
+       if($this->request->getPost('status') == 'Benefit'){
            $bobot = $this->request->getPost('bobot');
        } else {
            $bobot = -($this->request->getPost('bobot'));

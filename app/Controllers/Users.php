@@ -80,4 +80,35 @@ class Users extends BaseController
         session()->setFlashdata('success', 'Data user berhasil dihapus');
         return redirect()->to(base_url('users'));
     }
+
+    public function editPassword($id)
+    {
+        session();
+        $data['title'] = $this->title;
+        $data['user'] = $this->model->where(['id' => $id])->first();
+        $data['validation'] = \Config\Services::validation();
+        return view('users/editPassword', $data);
+    }
+
+    public function updatePassword($id)
+    {
+        if($this->request->getPost('password') == $this->request->getPost('password-confirm'))
+        {
+            $validation = \Config\Services::validation();
+            $user = [
+                'id'      => $id,
+                'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            ];
+            if($validation->run($user, 'editpassword')){
+            $this->model->save($user);
+            session()->setFlashdata('success', 'Password user berhasil diupdate');
+            return redirect()->to(base_url('users'));
+            } else {
+                return redirect()->to(base_url('users/edit-password/'.$id))->withInput()->with('validation', $validation);
+            }
+        } else {
+            session()->setFlashdata('danger', 'Konfirmasi password tidak sesuai');
+            return redirect()->to(base_url('users/edit-password/'.$id));
+        }
+    }
 }

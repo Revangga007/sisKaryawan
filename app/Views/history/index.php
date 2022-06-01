@@ -2,9 +2,8 @@
 
 <?= $this->section('content'); ?>
     <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Daftar <?= $title ?? null; ?></h6>
-            <a href="<?= base_url('kriteria/create'); ?>" class="btn btn-outline-primary btn-sm"><li class="fa fa-plus"></li> Tambah</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

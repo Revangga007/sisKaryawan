@@ -24,10 +24,10 @@ class Profil extends BaseController
         $alternatifModel = new AlternatifModel();
         $kriteriaModel = new KriteriaModel();
         $data['title'] = 'Ranking';
+        $data['jumlah'] = $pegawaiModel->where(['status' => 'Aktif'])->countAllResults();
         $data['kriterias'] = $kriteriaModel->findAll();
         $data['alternatifs'] = $alternatifModel->where(['kode_pegawai' => session('id')])->get()->getResultArray();
         $data['history_detail'] = $historyDetailModel->where(['nama' => session("nama")])->orderBy('created_at', 'DESC')->first();
-        // dd($data);
         return view('pegawai/ranking', $data);
     }
 }

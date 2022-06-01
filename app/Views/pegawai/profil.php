@@ -12,23 +12,19 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" width="100%" cellspacing="0">
                             <tr>
-                                <td>Nama</td>
-                                <td width="2%">:</td>
+                                <td width="30%">Nama</td>
                                 <td><?= $pegawai['nama'] ?></td>
                             </tr>
                             <tr>
                                 <td>Jenis Kelamin</td>
-                                <td wiidth="2%">:</td>
                                 <td><?= $pegawai['jekel'] ?></td>
                             </tr>
                             <tr>
                                 <td>No.Handphone</td>
-                                <td wiidth="2%">:</td>
                                 <td><?= $pegawai['no_hp'] ?></td>
                             </tr>
                             <tr>
                                 <td>Alamat</td>
-                                <td wiidth="2%">:</td>
                                 <td><?= $pegawai['alamat'] ?></td>
                             </tr>
                         </table>

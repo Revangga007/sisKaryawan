@@ -37,6 +37,11 @@ class Pegawai extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => 255
             ],
+            'status' => [
+                'type'          => 'ENUM',
+                'constraint'    => ['Aktif', 'Tidak Aktif'],
+                'default'       => 'Aktif'
+            ],
             'created_at'    => [
                 'type'          => 'DATETIME',
                 'null'          => TRUE

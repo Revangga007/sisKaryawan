@@ -52,6 +52,8 @@ $routes->group('pegawai',['filter' => 'auth'], function($routes){
     $routes->get('edit/(:any)', 'pegawai::edit/$1');
     $routes->put('update/(:any)', 'pegawai::update/$1');
     $routes->delete('delete/(:any)', 'pegawai::delete/$1');
+    $routes->get('edit-password/(:any)', 'pegawai::editPassword/$1');
+    $routes->put('update-password/(:any)', 'pegawai::updatePassword/$1');
     $routes->get('profil', 'profil::index');
     $routes->get('ranking', 'profil::ranking');
 });
@@ -63,6 +65,8 @@ $routes->group('users',['filter' => 'auth'], function($routes){
     $routes->get('edit/(:any)', 'users::edit/$1');
     $routes->put('update/(:any)', 'users::update/$1');
     $routes->delete('delete/(:any)', 'users::delete/$1');
+    $routes->get('edit-password/(:any)', 'users::editPassword/$1');
+    $routes->put('update-password/(:any)', 'users::updatePassword/$1');
 });
 
 $routes->group('alternatif',['filter' => 'auth'], function($routes){

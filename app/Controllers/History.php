@@ -41,6 +41,7 @@ class History extends BaseController
     {
         $this->modelDetail->delete(['header_id' => $id]);
         $this->modelHeader->delete($id);
+        session()->setFlashdata('success', 'Data history berhasil dihapus');
         return redirect()->to(base_url('history'));
     }
 }

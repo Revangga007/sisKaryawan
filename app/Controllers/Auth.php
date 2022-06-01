@@ -8,10 +8,10 @@ use App\Models\UserModel;
 
 class Auth extends BaseController
 {
-    
+
     public function login()
     {
-        if(session('id') && session('nama') && session('username') && session('role')){
+        if (session('id') && session('nama') && session('username') && session('role')) {
             return redirect()->to(base_url('/'));
         }
         session();
@@ -20,12 +20,12 @@ class Auth extends BaseController
 
     public function login_action()
     {
-       $auth = $this->request->getPost();
-       if($auth['role'] == 'pegawai'){
+        $auth = $this->request->getPost();
+        if ($auth['role'] == 'pegawai') {
             $pegawaiModel = new PegawaiModel();
-            $pegawai = $pegawaiModel->where(['username' => $auth['username']])->first();
-            if($pegawai) {
-                if(password_verify($auth['password'], $pegawai['password'])){
+            $pegawai = $pegawaiModel->where(['username' => $auth['username']])->where(['status' => 'Aktif'])->first();
+            if ($pegawai) {
+                if (password_verify($auth['password'], $pegawai['password'])) {
                     $session_data['id'] = $pegawai['kode'];
                     $session_data['nama'] = $pegawai['nama'];
                     $session_data['username'] = $pegawai['username'];
@@ -38,12 +38,12 @@ class Auth extends BaseController
             } else {
                 return redirect()->to(base_url('login'))->withInput()->with('danger', 'Username tidak ditemukan!');
             }
-       }
+        }
 
-       $model = new UserModel();
-       $user = $model->where(['username' => $auth['username']])->first();
-       if($user){
-            if(password_verify($auth['password'], $user['password'])){
+        $model = new UserModel();
+        $user = $model->where(['username' => $auth['username']])->where(['role' => $auth['role']])->first();
+        if ($user) {
+            if (password_verify($auth['password'], $user['password'])) {
                 $session_data['id'] = $user['id'];
                 $session_data['nama'] = $user['nama'];
                 $session_data['username'] = $user['username'];
@@ -53,12 +53,13 @@ class Auth extends BaseController
             } else {
                 return redirect()->to(base_url('login'))->withInput()->with('danger', 'Password tidak sesuai!');
             }
-       } else {
-           return redirect()->to(base_url('login'))->withInput()->with('danger', 'Username tidak ditemukan!');
-       }
+        } else {
+            return redirect()->to(base_url('login'))->withInput()->with('danger', 'Username tidak ditemukan!');
+        }
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->remove('id');
         session()->remove('nama');
         session()->remove('username');

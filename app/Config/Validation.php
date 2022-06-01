@@ -52,6 +52,11 @@ class Validation
         'no_hp'     => 'required',
         'alamat'    => 'required',
         'username'  => 'required',
+        'password'  => 'required',
+        'status'    => 'required'
+    ];
+
+    public $editpassword = [
         'password'  => 'required'
     ];
 
@@ -93,6 +98,9 @@ class Validation
         'password'=>[
             'required'   => 'Password pegawai harus diisi',
         ],
+        'status' =>[
+            'required'  => 'Status pegawai harus diisi'
+        ]
     ];
 
     public $user_errors = [

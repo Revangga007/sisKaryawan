@@ -18,11 +18,11 @@ class Perhitungan extends BaseController
         $alternatifModel = new AlternatifModel();
         $data['title'] = 'Perhitungan';
         $data['jumlah'] = $kriteriaModel->selectSum('bobot')->first();
-        $data['pegawais'] = $pegawaiModel->orderBy('created_at', 'ASC')->get()->getResultArray();
+        $data['pegawais'] = $pegawaiModel->where(['status' => 'Aktif'])->orderBy('created_at', 'ASC')->get()->getResultArray();
         $data['kriterias'] = $kriteriaModel->findAll();
         $data['alternatifs'] = $alternatifModel->findAll();
         $jumlahAlternatif = $alternatifModel->countAll();
-        $jumlahData = $pegawaiModel->countAll() * $kriteriaModel->countAll();
+        $jumlahData = $pegawaiModel->where(['status' => 'Aktif'])->countAllResults() * $kriteriaModel->countAll();
         if($jumlahData !== $jumlahAlternatif) {
             session()->setFlashdata('warning', 'Data Alternatif belum lengkap, mohon lengkapi terlebih dahulu!');
            return redirect()->to(base_url('alternatif'));
@@ -55,6 +55,7 @@ class Perhitungan extends BaseController
                 }
             }
         }
+         session()->setFlashdata('success', 'Data perhitungan berhasil disimpan');
         return redirect()->to(base_url('perhitungan'));
     }
 }

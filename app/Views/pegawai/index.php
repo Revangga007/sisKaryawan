@@ -13,11 +13,12 @@
                         <tr>
                             <th>No</th>
                             <th>Kode</th>
-                            <th>Nama</th>
+                            <th width="15%">Nama</th>
                             <th>Jekel</th>
                             <th>No.HP</th>
                             <th>Alamat</th>
                             <th>Username</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -31,6 +32,7 @@
                             <td><?= $pegawai['no_hp']; ?></td>
                             <td><?= $pegawai['alamat']; ?></td>
                             <td><?= $pegawai['username']; ?></td>
+                            <td><?= $pegawai['status']; ?></td>
                             <td>
                                 <a href="<?= base_url('pegawai/edit/'.$pegawai['kode']); ?>" class="btn btn-sm btn-warning"><li class="fas fa-edit"></li>&nbsp;Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapus_<?= $pegawai['kode']; ?>">

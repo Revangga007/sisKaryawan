@@ -8,6 +8,8 @@
             <input type="hidden" name="password" value="<?= $user['password']; ?>">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Edit <?= $title ?? null; ?></h6>
+                <a href="<?= base_url('users/edit-password/'.$user['id']); ?>" class="btn btn-outline-primary btn-sm"><i class="fas fa-key"></i> Ubah Password</a>
+
             </div>
             <div class="card-body">
                 <div class="container">
@@ -30,7 +32,7 @@
                         <select name="role" id="role" class="form-control">
                             <option selected disabled>Pilih role</option>
                             <option value="admin" <?= (old('role') ?? $user['role'])=='admin' ? 'selected' : null; ?>>Admin</option>
-                            <option value="tu" <?= (old('role') ?? $user['role'])=='' ? 'selected' : null; ?>>Kasubag Tu</option>
+                            <option value="tu" <?= (old('role') ?? $user['role'])=='tu' ? 'selected' : null; ?>>Kasubag Tu</option>
                         </select>
                     </div>
                 </div>
