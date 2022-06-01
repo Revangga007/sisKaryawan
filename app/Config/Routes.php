@@ -21,7 +21,7 @@ $routes->setDefaultController('Dashboard');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -31,9 +31,63 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'dashboard::index');
+$routes->get('login', 'auth::login');
+$routes->post('login', 'auth::login_action');
+$routes->get('logout', 'auth::logout');
+$routes->get('/', 'dashboard::index', ['filter' => 'auth']);
 
-$routes->delete('/kriteria/delete/(:any)', 'Kriteria::delete/$1');
+$routes->group('kriteria',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'kriteria::index');
+    $routes->get('create', 'kriteria::create');
+    $routes->post('store', 'kriteria::store');
+    $routes->get('edit/(:any)', 'kriteria::edit/$1');
+    $routes->put('update/(:any)', 'kriteria::update/$1');
+    $routes->delete('delete/(:any)', 'kriteria::delete/$1');
+});
+
+$routes->group('pegawai',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'pegawai::index');
+    $routes->get('create', 'pegawai::create');
+    $routes->post('store', 'pegawai::store');
+    $routes->get('edit/(:any)', 'pegawai::edit/$1');
+    $routes->put('update/(:any)', 'pegawai::update/$1');
+    $routes->delete('delete/(:any)', 'pegawai::delete/$1');
+    $routes->get('edit-password/(:any)', 'pegawai::editPassword/$1');
+    $routes->put('update-password/(:any)', 'pegawai::updatePassword/$1');
+    $routes->get('profil', 'profil::index');
+    $routes->get('ranking', 'profil::ranking');
+});
+
+$routes->group('users',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'users::index');
+    $routes->get('create', 'users::create');
+    $routes->post('store', 'users::store');
+    $routes->get('edit/(:any)', 'users::edit/$1');
+    $routes->put('update/(:any)', 'users::update/$1');
+    $routes->delete('delete/(:any)', 'users::delete/$1');
+    $routes->get('edit-password/(:any)', 'users::editPassword/$1');
+    $routes->put('update-password/(:any)', 'users::updatePassword/$1');
+});
+
+$routes->group('alternatif',['filter' => 'auth'], function($routes){
+    $routes->get('/', 'alternatif::index');
+    $routes->get('reset', 'alternatif::reset');
+    $routes->get('show/(:any)', 'alternatif::show/$1');
+    $routes->post('create/(:any)', 'alternatif::create/$1');
+    $routes->put('update/(:any)', 'alternatif::update/$1');
+    $routes->delete('delete/(:any)', 'alternatif::delete/$1');
+});
+
+$routes->group('perhitungan', ['filter' => 'auth'], function($routes){
+    $routes->get('/', 'perhitungan::index');
+    $routes->post('store', 'perhitungan::store');
+});
+
+$routes->group('history', ['filter' => 'auth'], function($routes){
+    $routes->get('/', 'history::index');
+    $routes->get('generate/(:any)', 'history::generate/$1');
+    $routes->delete('delete/(:any)', 'history::delete/$1');
+});
 
 /*
  * --------------------------------------------------------------------

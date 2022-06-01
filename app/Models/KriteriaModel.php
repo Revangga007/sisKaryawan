@@ -12,27 +12,12 @@ class KriteriaModel extends Model
     protected $useTimestamps    = true;
     protected $allowedFields    = ['kode', 'nama', 'bobot', 'status'];
 
-    public function getData($kode = false)
-    {
-        if ($kode == false) {
-            return $this->findAll();
-        } else {
-            return $this->getWhere(['kode' => $kode]);
-        }
+    public function unSelected($kode){
+        $result = $this->db->query("SELECT kriteria.* FROM `kriteria` WHERE kriteria.kode NOT IN 
+        (SELECT kriteria.kode FROM kriteria JOIN alternatif ON kriteria.kode = alternatif.kode_kriteria 
+        WHERE alternatif.kode_pegawai = '$kode')")->getResultArray();
+        return $result;
     }
-
-    public function storeData($kriteria)
-    {
-        return $this->db->table($this->table)->insert($kriteria);
-    }
-
-    public function updateData($kriteria, $kode)
-    {
-        return $this->db->table($this->table)->update($kriteria,['kode' => $kode]);
-    }
-
-    public function deleteData($kode)
-    {
-        return $this->delete($kode);
-    }
+    
 }
+

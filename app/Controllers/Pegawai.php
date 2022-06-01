@@ -15,12 +15,114 @@ class Pegawai extends BaseController
     public function index()
     {
         $data['title'] = $this->title;
-        $data['pegawais'] = $this->model->getData();
+        $data['pegawais'] = $this->model->orderBy('created_at', 'ASC')->get()->getResultArray();
         return view('pegawai/index', $data);
     }
 
     public function create() 
     {
-        
+        $data['title'] = $this->title;
+        session();
+        $jumlahKode = $this->model->countAll();
+        if($jumlahKode > 0) {
+            $data['generateKode'] = sprintf("A%s", $jumlahKode + 1);
+        } else if($jumlahKode == 0) {
+            $data['generateKode'] = "A1";
+        }
+        $data['validation'] = \Config\Services::validation();
+        return view('pegawai/create', $data);
+    }
+
+    public function store()
+    {
+       $validation = \Config\Services::validation();
+    //    dd($this->request->getPost());
+       $pegawai = [
+           'kode'       => $this->request->getPost('kode'),
+           'nama'       => $this->request->getPost('nama'),
+           'jekel'      => $this->request->getPost('jekel'),
+           'no_hp'      => $this->request->getPost('no_hp'),
+           'alamat'     => $this->request->getPost('alamat'),
+           'username'   => $this->request->getPost('username'),
+           'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+           'status'     => $this->request->getPost('status')
+       ];
+       if($validation->run($pegawai, 'pegawai')){
+           $this->model->save($pegawai);
+           session()->setFlashdata('success', 'Data pegawai berhasil disimpan');
+           return redirect()->to(base_url('pegawai'));
+       } else {
+            return redirect()->to(base_url('pegawai/create'))->withInput()->with('validation', $validation);
+       }
+    }
+
+    public function edit($kode)
+    {
+        session();
+        $data['title'] = $this->title;
+        $data['pegawai'] = $this->model->where(['kode' => $kode])->first();
+        $data['validation'] = \Config\Services::validation();
+        return view('pegawai/edit', $data);
+    }
+
+    public function update($kode)
+    {
+        $validation = \Config\Services::validation();
+        $pegawai = [
+           'kode'       => $this->request->getPost('kode'),
+           'nama'       => $this->request->getPost('nama'),
+           'jekel'      => $this->request->getPost('jekel'),
+           'no_hp'      => $this->request->getPost('no_hp'),
+           'alamat'     => $this->request->getPost('alamat'),
+           'username'   => $this->request->getPost('username'),
+           'password'   => $this->request->getPost('password'),
+           'status'     => $this->request->getPost('status')
+
+        ];
+        if($validation->run($pegawai, 'pegawai')){
+           $this->model->save($pegawai);
+           session()->setFlashdata('success', 'Data pegawai berhasil diupdate');
+           return redirect()->to(base_url('pegawai'));
+        } else {
+            return redirect()->to(base_url('pegawai/edit/'.$kode))->withInput()->with('validation', $validation);
+        }
+    }
+
+    public function delete($kode)
+    {
+        $this->model->delete($kode);
+        session()->setFlashdata('success', 'Data pegawai berhasil dihapus');
+        return redirect()->to(base_url('pegawai'));
+    }
+
+    public function editPassword($kode)
+    {
+        session();
+        $data['title'] = $this->title;
+        $data['pegawai'] = $this->model->where(['kode' => $kode])->first();
+        $data['validation'] = \Config\Services::validation();
+        return view('pegawai/editPassword', $data);
+    }
+
+    public function updatePassword($kode)
+    {
+        if($this->request->getPost('password') == $this->request->getPost('password-confirm'))
+        {
+            $validation = \Config\Services::validation();
+            $pegawai = [
+                'kode'      => $kode,
+                'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            ];
+            if($validation->run($pegawai, 'editpassword')){
+            $this->model->save($pegawai);
+            session()->setFlashdata('success', 'Password pegawai berhasil diupdate');
+            return redirect()->to(base_url('pegawai'));
+            } else {
+                return redirect()->to(base_url('pegawai/edit-password/'.$kode))->withInput()->with('validation', $validation);
+            }
+        } else {
+            session()->setFlashdata('danger', 'Konfirmasi password tidak sesuai');
+            return redirect()->to(base_url('pegawai/edit-password/'.$kode));
+        }
     }
 }

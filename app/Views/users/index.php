@@ -4,43 +4,35 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Daftar <?= $title ?? null; ?></h6>
-            <a href="<?= base_url('pegawai/create'); ?>" class="btn btn-outline-primary btn-sm"><li class="fas fa-plus"></li> Tambah</a>
+            <a href="<?= base_url('users/create'); ?>" class="btn btn-outline-primary btn-sm"><li class="fa fa-plus"></li> Tambah</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-center">
                         <tr>
-                            <th>No</th>
-                            <th>Kode</th>
-                            <th width="15%">Nama</th>
-                            <th>Jekel</th>
-                            <th>No.HP</th>
-                            <th>Alamat</th>
-                            <th>Username</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
+                            <th width="7%">No</th>
+                            <th>Nama</th>
+                            <th width="20%">Username</th>
+                            <th width="20%">Role</th>
+                            <th width="17%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($pegawais as $key => $pegawai) : ?>
+                        <?php foreach($users as $key => $user) : ?>
                         <tr>
                             <td><?= $key + 1; ?></td>
-                            <td><?= $pegawai['kode']; ?></td>
-                            <td><?= $pegawai['nama']; ?></td>
-                            <td><?= $pegawai['jekel']; ?></td>
-                            <td><?= $pegawai['no_hp']; ?></td>
-                            <td><?= $pegawai['alamat']; ?></td>
-                            <td><?= $pegawai['username']; ?></td>
-                            <td><?= $pegawai['status']; ?></td>
+                            <td><?= $user['nama']; ?></td>
+                            <td><?= $user['username']; ?></td>
+                            <td><?= $user['role'] == 'admin' ? 'Admin' : 'Kasubag TU' ?></td>
                             <td>
-                                <a href="<?= base_url('pegawai/edit/'.$pegawai['kode']); ?>" class="btn btn-sm btn-warning"><li class="fas fa-edit"></li>&nbsp;Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapus_<?= $pegawai['kode']; ?>">
+                                <a href="<?= base_url('users/edit/'.$user['id']); ?>" class="btn btn-sm btn-warning"><li class="fas fa-edit"></li>&nbsp;Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapus_<?= $user['id']; ?>">
                                     <li class="fas fa-trash"></li>
                                     &nbsp;Hapus
                                 </button>
                                 <!-- Modal Hapus -->
-                                <div class="modal fade" id="modalHapus_<?= $pegawai['kode']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="modalHapus_<?= $user['id']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -50,10 +42,10 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                Apakah anda yakin akan menghapus data <?= $pegawai['nama']; ?>?
+                                                Apakah anda yakin akan menghapus data <?= $user['nama']; ?>?
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="<?= base_url('pegawai/delete/'.$pegawai['kode'])?>" method="post">
+                                                <form action="<?= base_url('users/delete/'.$user['id'])?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

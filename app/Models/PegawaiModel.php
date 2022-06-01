@@ -10,30 +10,24 @@ class PegawaiModel extends Model
     protected $primaryKey       = 'kode';
     protected $useAutoIncrement = false;
     protected $useTimestamps    = true;
-    protected $allowedFields    = [];
-
-    public function getData($kode = false)
-    {
-        if ($kode == false) {
-            return $this->findAll();
-        } else {
-            return $this->getWhere(['kode' => $kode]);
-        }
+    protected $allowedFields    = ['kode', 'nama', 'jekel', 'no_hp', 'alamat', 'username', 'password', 'status'];
+ 
+    public function unSelected($kode){
+        $result = $this->db->query("SELECT * FROM `pegawai` CROSS JOIN `kriteria` WHERE kriteria.kode NOT IN 
+        (SELECT kriteria.kode FROM kriteria JOIN alternatif ON kriteria.kode = alternatif.kode_kriteria 
+        WHERE alternatif.kode_pegawai = '$kode')")->getResultArray();
+        return $result;
     }
 
-    public function storeData($pegawai)
+    public function countAlternatif()
     {
-        return $this->db->table($this->table)->insert($pegawai);
+        $result = $this->join("alternatif", "alternatif.kode_pegawai = pegawai.kode", "left")
+        ->select('pegawai.kode,pegawai.nama,count(alternatif.id) as alternatif')
+        ->groupBy('pegawai.kode')
+        ->where('pegawai.status','Aktif')
+        ->orderBy('pegawai.created_at', 'ASC')
+        ->get()->getResultArray();
+        return $result;
     }
-
-    public function updateData($pegawai, $kode)
-    {
-        return $this->db->table($this->table)->update($pegawai,['kode' => $kode]);
-    }
-
-    public function deleteData($kode)
-    {
-        return $this->delete($kode);
-    }
-
+    
 }

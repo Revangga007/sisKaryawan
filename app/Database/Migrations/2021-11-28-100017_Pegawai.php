@@ -10,7 +10,7 @@ class Pegawai extends Migration
     {
         $this->forge->addField([
             'kode' => [
-                'type'          => 'CHAR',
+                'type'          => 'VARCHAR',
                 'constraint'    => 4,
             ],
             'nama' => [
@@ -28,9 +28,19 @@ class Pegawai extends Migration
             'alamat'    => [
                 'type'          => 'TEXT',
             ],
-            'jabatan'   => [
+            'username' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => 100
+                'constraint'    => 100,
+                'unique'        => TRUE
+            ],
+            'password' => [
+                'type'          => 'VARCHAR',
+                'constraint'    => 255
+            ],
+            'status' => [
+                'type'          => 'ENUM',
+                'constraint'    => ['Aktif', 'Tidak Aktif'],
+                'default'       => 'Aktif'
             ],
             'created_at'    => [
                 'type'          => 'DATETIME',
